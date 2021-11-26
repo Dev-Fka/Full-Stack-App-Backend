@@ -18,7 +18,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity(name="Address")
 @Table(name="Addresses",uniqueConstraints = {@UniqueConstraint(columnNames = {"description","person_id"})})
-public class Adress {
+public class Address {
 
 
 	@Id
@@ -35,7 +35,7 @@ public class Adress {
 	@Column(name="description")
 	private String description;
 
-	public Adress(int id, Person person, String description) {
+	public Address(int id, Person person, String description) {
 		super();
 		this.id = id;
 		this.person = person;
@@ -43,7 +43,7 @@ public class Adress {
 	}
 	
 	
-	public Adress() {
+	public Address() {
 		
 	}
 	
