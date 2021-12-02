@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,7 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity(name="Address")
-@Table(name="Addresses",uniqueConstraints = {@UniqueConstraint(columnNames = {"description","person_id"})})
+@Table(name="Addresses",uniqueConstraints = {@UniqueConstraint(columnNames = {"description","personId"})})
 public class Address {
 
 
@@ -27,8 +26,8 @@ public class Address {
 	
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name="person_id",nullable = false)
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name="personId",nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Person person;
 	

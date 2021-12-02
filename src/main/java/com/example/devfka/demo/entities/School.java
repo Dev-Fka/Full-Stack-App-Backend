@@ -7,9 +7,9 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-@Entity(name="Education")
-@Table(name="Education",uniqueConstraints = {@UniqueConstraint(columnNames = {"person_id","school_name"})})
-public class Education {
+@Entity(name="School")
+@Table(name="School",uniqueConstraints = {@UniqueConstraint(columnNames = {"personId","schoolName"})})
+public class School {
 	
 	@Id
 	@Column(name="id")
@@ -17,28 +17,28 @@ public class Education {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name="person_id",nullable = false)
+	@JoinColumn(name="personId",nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	 private Person person;
 	
-	@Column(name="school_name",nullable = true)
-	private String school_name;
+	@Column(name="schoolName",nullable = true)
+	private String schoolName;
 	
-	@Column(name="finish_date",nullable = true)
+	@Column(name="finishDate",nullable = true)
 	@Temporal(TemporalType.DATE)
-	private Date finish_date;
+	private Date finishDate;
 
 	
 	
-	public Education(int id, Person person, String school_name, Date finish_date) {
+	public School(int id, Person person, String school_name, Date finish_date) {
 		super();
 		this.id = id;
 		this.person = person;
-		this.school_name = school_name;
-		this.finish_date = finish_date;
+		this.schoolName = school_name;
+		this.finishDate = finish_date;
 	}
 	
-	public Education() {
+	public School() {
 		
 	}
 	
@@ -59,19 +59,19 @@ public class Education {
 	}
 
 	public String getSchool_name() {
-		return school_name;
+		return schoolName;
 	}
 
 	public void setSchool_name(String school_name) {
-		this.school_name = school_name;
+		this.schoolName = school_name;
 	}
 
 	public Date getFinish_date() {
-		return finish_date;
+		return finishDate;
 	}
 
 	public void setFinish_date(Date finish_date) {
-		this.finish_date = finish_date;
+		this.finishDate = finish_date;
 	}
 	
 	

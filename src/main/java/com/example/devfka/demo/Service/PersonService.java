@@ -20,13 +20,19 @@ public class PersonService {
 	public List<Person> getAll(){
 		return personRepo.findAll();
 	}
-	public Person getPersonById(Long id) {
+	public Person getPersonById(int id) {
 		return personRepo.findById(id).orElse(null);
 	}
+	
+	public Person getByPersonIdentyNum(String identyNum) {
+		return personRepo.findByIdentityNumber(identyNum);
+	}
+	
 	public Person saveOnePerson(Person newPerson) {
 		return personRepo.save(newPerson);
 	}
-	public Person updatePerson(Long id,Person newPerson) {
+	
+	public Person updatePerson(int id,Person newPerson) {
 		Optional<Person> person=personRepo.findById(id);
 		if(person.isPresent()) {
 			Person foundedPerson =person.get();
@@ -39,7 +45,7 @@ public class PersonService {
 			return null;
 		}
 	}
-	public void deleteById(Long id) {
+	public void deleteById(int id) {
 		personRepo.deleteById(id);
 	}
 }

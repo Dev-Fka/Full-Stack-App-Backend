@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.devfka.demo.entities.Person;
 
 public interface IPersonDal {
-	//Im create that for maybe we want Hibernate access.
+	//I'm create that for maybe we want Hibernate ORM.
 	
 	List<Person> getAll();
 	void add(Person person);
