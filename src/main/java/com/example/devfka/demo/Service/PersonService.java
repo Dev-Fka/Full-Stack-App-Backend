@@ -39,6 +39,7 @@ public class PersonService {
 			foundedPerson.setName(newPerson.getName());
 			foundedPerson.setLastName(newPerson.getLastName());
 			foundedPerson.setBirthDate(newPerson.getBirthDate());
+			
 			personRepo.save(foundedPerson);
 			return foundedPerson;
 		}else {

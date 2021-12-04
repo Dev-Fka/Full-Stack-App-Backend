@@ -14,6 +14,8 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity(name="Address")
 @Table(name="Addresses",uniqueConstraints = {@UniqueConstraint(columnNames = {"description","personId"})})
@@ -29,9 +31,10 @@ public class Address {
 	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="personId",nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
 	private Person person;
 	
-	@Column(name="description")
+	@Column(name="description",nullable = false)
 	private String description;
 
 	public Address(int id, Person person, String description) {

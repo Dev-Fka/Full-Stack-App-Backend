@@ -4,6 +4,10 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity(name="Person")
 @Table(name="Persons")
@@ -19,14 +23,16 @@ public class Person {
 	@Column(name="lastName",nullable = false)
 	private String lastName;
 	
-	@Column(name="identityNumber",nullable=false,unique = true,length = 12)
+	@Column(name="identityNumber",nullable = false,unique = true,length = 12)
 	private String identityNumber;
 	
-	@Column(name="birthDate",nullable=false)
+	@Column(name="birthDate",nullable = false)
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
 	private Date birthDate;
 	
-	@Column(name="bloodGroup",nullable=false)
+	@Column(name="bloodGroup",nullable = false)
 	private String bloodGroup;
 
 	public Person(int id, String name, String lastName, String identityNumber, Date birthDate, String bloodGroup) {

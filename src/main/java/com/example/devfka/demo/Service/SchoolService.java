@@ -34,14 +34,15 @@ public class SchoolService {
 		return schoolRepo.findByschoolNameContaining(schoolName);
 	}
 	
-	public School saveSchool(int id,Date date,String schoolName) {
+	public School saveSchool(int id,School newSchool) {
 		Person person=personService.getPersonById(id);
 		if(person!=null) {
 			School schoolOfPerson=new School();
 			schoolOfPerson.setPerson(person);
-			schoolOfPerson.setSchool_name(schoolName);
-			schoolOfPerson.setFinish_date(date);
-			return schoolRepo.save(schoolOfPerson);
+			schoolOfPerson.setSchoolName(newSchool.getSchoolName());
+			schoolOfPerson.setFinishDate(newSchool.getFinishDate());
+			schoolRepo.save(schoolOfPerson);
+			return schoolOfPerson;
 		}else 
 		{
 			return null;
@@ -49,28 +50,18 @@ public class SchoolService {
 	}
 	
 	
-	public School updateOneSchool(int id,Date date,String schoolName) {
-		Optional<School> schoolInfo=schoolRepo.findById(id);
-		if(schoolInfo.isPresent()) {
-			School toUpdate=schoolInfo.get();
-			toUpdate.setFinish_date(date);
-			toUpdate.setSchool_name(schoolName);
-			return schoolRepo.save(toUpdate);
-		}else
-		{
-			return null;
+	public School updateOneSchool(int id,School newSchool) {
+		Optional<School> schoolForUpdate=schoolRepo.findById(id);
+		if(schoolForUpdate.isPresent()) {
+			School schoolForUpdateNew=schoolForUpdate.get();
+			schoolForUpdateNew.setFinishDate(newSchool.getFinishDate());
+			schoolForUpdateNew.setSchoolName(newSchool.getSchoolName());
+			return schoolRepo.save(schoolForUpdateNew);
 		}
+		return null;
 	}
 	
-	public void deleteSchool(int id,String schoolName) {
-		Person person=personService.getPersonById(id);
-		if(person!=null) {
-			List<School> schools=schoolRepo.findByPersonId(id);
-			for (School school : schools) {
-				if(school.getSchool_name()== schoolName) {
-					schoolRepo.delete(school);
-				}
-			}
-		}
+	public void deleteSchool(int id) {
+		schoolRepo.deleteById(id);
 	}
 }

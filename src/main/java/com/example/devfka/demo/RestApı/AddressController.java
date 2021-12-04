@@ -2,9 +2,11 @@ package com.example.devfka.demo.RestApı;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,18 +39,18 @@ public class AddressController {
 		return _addressService.getByPersonId(id);
 	}
 	
-	@PostMapping("/save")
-	public Address saveAdress(@RequestBody String identyNumber,String description) {
-		return _addressService.saveAddress(identyNumber,description);
+	@PostMapping("/{id}")
+	public Address saveAdress(@PathVariable int id, @RequestBody Address newAdress) {
+		return _addressService.saveAddress(id,newAdress);
 	}
 	
-	@PostMapping("/update/{description}")
-	public Address updateAddress(@PathVariable String description,@RequestBody String identyNumber) {
-		return _addressService.updateAddress(identyNumber, description);
+	@PutMapping("/{id}")
+	public Address updateAddress(@PathVariable int id,@RequestBody Address newAdress) {
+		return _addressService.updateAddress(id,newAdress);
 	}
 	
-	@PostMapping("/delete")
-	public void deleteAddress(@RequestBody String identyNumber) {
-		 _addressService.deleteAddress(identyNumber);
+	@DeleteMapping("/{id}")
+	public void deleteAddress(@PathVariable int id) {
+		 _addressService.deleteAddress(id);
 	}
 }
